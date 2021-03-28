@@ -1,5 +1,6 @@
 package com.everis.bootcamp.threading
 
+import android.util.Log
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -12,9 +13,9 @@ class AstrosRepository {
             .url("http://api.open-notify.org/astros.json")
             .build()
         val response = client.newCall(request).execute()
-        val result = parseJsonToResult(response.body?.toString())
+        val result = parseJsonToResult(response.body?.string())
         return result.people
     }
 
-    fun parseJsonToResult(json: String?) = Gson().fromJson(json, AstrosResult::class.java)
+    fun parseJsonToResult(json: String?) = Gson().fromJson<AstrosResult>(json, AstrosResult::class.java)
 }

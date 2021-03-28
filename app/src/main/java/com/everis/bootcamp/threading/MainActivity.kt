@@ -13,7 +13,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //TODO: 018 - fazer o handle do clique do botão
+        button_load_data.setOnClickListener {
+            launchAstorsTask()
+        }
     }
 
     fun showData(list: List<AstrosPeople>?) {
@@ -31,8 +33,10 @@ class MainActivity : AppCompatActivity() {
         progressbar_load_indicator.visibility = View.GONE
     }
 
-
-    //TODO: 017 - Criar função para lançar a Task
+    fun launchAstorsTask() {
+        val task = TaskAstros()
+        task.execute()
+    }
 
 
     inner class TaskAstros() : AsyncTask<Void, Int, List<AstrosPeople>>() {
